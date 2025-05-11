@@ -67,10 +67,17 @@ const Appointments = () => {
   useEffect(() => {
     console.log(docSlots);
   }, [docSlots]);
+function BookingComponent() {
+  return (
+    <div>
+      <p onClick={() => alert("Your appointment is booked!")}>Booking Slots</p>
+    </div>
+  );
+}
 
   return (
     docInfo && (
-      <div>
+      <div className="m-10">
         <div className="flex flex-col sm:flex-row gap-4">
           <div>
             <img
@@ -110,7 +117,8 @@ const Appointments = () => {
           </div>
         </div>
         <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
-          <p>Booking Slots</p>
+
+
           <div className="flex gap-3 items-center w-full overflow-x-scroll mt-4">
             {docSlots.length &&
               docSlots.map((item, index) => (
@@ -136,7 +144,18 @@ const Appointments = () => {
                 <p onClick={()=>setSlotTime(item.time)} className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time===slotTime ?   'bg-blue-500 text-white':'text-gray-400 border border-gray-300'}`} key={index}>{item.time.toLowerCase()}</p>
               ))}
           </div>
-          <button className="bg-blue-500 text-white text-sm font-light px-14 py-3 rounded-full my-6 cursor-pointer ">Book an appoinment</button>
+          
+          <button
+  onClick={() => alert(`Your appointment is booked at ${slotTime || 'an available time'}!`)}
+  className="bg-blue-500 text-white text-lg font-light ml-10 px-14 py-4 font-semibold rounded-full my-6 cursor-pointer "
+>
+  Book an appointment
+</button>
+<button  className="bg-blue-500 text-white text-lg font-light ml-10 px-14 py-4 font-semibold rounded-full my-6 cursor-pointer "
+>
+  
+<a href="https://resilient-bublanina-0eac7e.netlify.app/">start your consultation</a>
+</button>
         </div>
         <RelatedDoctor docId={docId} speciality={docInfo.speciality}/>
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -16,29 +17,49 @@ const Header = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row flex-wrap bg-blue-500 rounded-lg px-6 md:px-10 lg:px-20">
-      <div className="md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 m-auto md:py-[10vw] md:mb-[10px]">
-        <p className="capitalize text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight">
-          book appointment <br className="hidden sm:block" /> with trusted doctors
-        </p>
-        <div className="flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light">
-          <img className="w-28" src={assets.group_profiles} alt="" />
-          <p>
-            Simply browse through our extensive list of trusted doctors, <br /> schedule your appointment hassle-free.
+    <div className="flex flex-col md:flex-row bg-indigo-100 rounded-xl p-6 md:p-10 lg:p-20 shadow-lg">
+      {/* Text Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="md:w-1/2 flex flex-col justify-center gap-6 py-10"
+      >
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-indigo-800 leading-tight">
+          Book Appointment <br className="hidden sm:block" /> with Trusted Doctors
+        </h1>
+
+        <div className="flex items-center gap-4">
+          <img className="w-20" src={assets.group_profiles} alt="Doctors" />
+          <p className="text-indigo-700 text-sm">
+            Browse our verified doctors <br /> and book appointments easily.
           </p>
         </div>
-        <button
-          onClick={handleBookClick}
-          className="flex items-center gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
-        >
-          Book appointment
-          <img className="w-3" src={assets.arrow_icon} alt="" />
-        </button>
-      </div>
 
-      <div className="md:w-1/2 relative">
-        <img className="w-full md:absolute bottom-0 h-auto rounded-lg" src={assets.header_img} alt="" />
-      </div>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          onClick={handleBookClick}
+          className="bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2 w-fit shadow hover:shadow-lg"
+        >
+          Book Appointment
+          <img className="w-4 invert" src={assets.arrow_icon} alt="→" />
+        </motion.button>
+      </motion.div>
+
+      {/* Image Section */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="md:w-1/2 flex justify-center items-center"
+      >
+        <img
+  className="w-full h-2xl max-w-5xl rounded-xl "
+  src="https://img.freepik.com/premium-photo/close-up-smart-doctor-pointing-human-anatomy-hologram-floating-remedial_31965-667244.jpg?w=1480"
+  alt="Doctor Illustration"
+/>
+
+      </motion.div>
     </div>
   );
 };

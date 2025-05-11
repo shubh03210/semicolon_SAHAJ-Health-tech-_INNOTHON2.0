@@ -14,26 +14,41 @@ const Signup = () => {
     dob: "",
   });
 
+  const [loading, setLoading] = useState(false); // State to track loading
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/api/signup",
-        formData,
-        { withCredentials: true }
-      );
-      console.log("User created:", response.data);
-      alert("Signup successful!");
-      navigate("/login");
-    } catch (error) {
-      console.error("Signup error:", error);
+  e.preventDefault();
+
+  setLoading(true);
+
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/api/signup",
+      formData,
+      { withCredentials: true }
+    );
+
+    console.log("User created:", response.data);
+    alert("Signup successful!");
+    navigate("/login");
+  } catch (error) {
+    // Display the error message to the user
+    console.error("Signup error:", error.response.data);
+    if (error.response && error.response.data.error) {
+      alert(error.response.data.error); // Display the error message (e.g., "Email or username already exists")
+    } else {
       alert("Signup failed. Please try again.");
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4">
@@ -101,8 +116,9 @@ const Signup = () => {
             whileTap={{ scale: 0.98 }}
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            disabled={loading} // Disable the button while loading
           >
-            Signup
+            {loading ? "Signing Up..." : "Signup"}
           </motion.button>
         </form>
 

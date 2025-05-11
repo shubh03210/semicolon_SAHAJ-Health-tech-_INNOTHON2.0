@@ -1,39 +1,49 @@
-import React from 'react'
-import { assets } from '../assets/assets'
+import React from 'react';
+import { assets } from '../assets/assets';
+import sahaj from '../assets/sahaj.png';
 
 const Footer = () => {
   return (
-    <div className='md:mx-10'>
-        <div className='flex flex-col md:flex-row justify-between gap-14 my-10 mt-40 text-sm'>
-
-            <div className='md:w-1/2'>
-                <img className='mb-5 w-40' src={assets.logo} alt="" />
-                <p className='w-full  text-gray-600 leading-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum reiciendis fuga dolor ratione quam dicta, omnis quos laboriosam dolorem consectetur! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse eligendi possimus officia fugiat repellendus tenetur incidunt quidem, similique nulla.</p>
-            </div>
-            <div>
-                <p className='uppercase text-xl font-medium mb-5'>company</p>
-                <ul className='flex flex-col gap-2 text-gray-600'>
-                    <li>Home</li>
-                    <li>About us</li>
-                    <li>Contact us</li>
-                    <li>Privacy Policy</li>
-                </ul>
-            </div>
-            <div>
-                <p className='uppercase text-xl font-medium mb-5'>get in touch</p>
-                <ul className='flex flex-col gap-2 text-gray-600'>
-                    <li>+91-98765-43210</li>
-                    <li>gaurav.1222parmar@gmail.com</li>
-                </ul>
-
-            </div>
+    <div className='bg-gray-900 text-white py-10'>
+      <div className='max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-10 text-sm'>
+        
+        {/* Logo and Description Section */}
+        <div className='w-full md:w-1/3'>
+          <img className='mb-4 w-36 mx-auto md:mx-0' src={sahaj} alt="Sahaj Logo" />
+          <p className='text-gray-300'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum reiciendis fuga dolor ratione quam dicta, omnis quos laboriosam dolorem consectetur! Quam esse eligendi possimus officia fugiat repellendus tenetur incidunt quidem, similique nulla.
+          </p>
         </div>
-        <div>
-            <hr />
-            <p className='py-5 text-sm text-center'>Copyright 2025@ Prescripto - All Right Reserved.</p>
+
+        {/* Company Links */}
+        <div className='w-full md:w-1/3'>
+          <p className='uppercase text-lg font-semibold mb-4'>Company</p>
+          <ul className='space-y-2 text-gray-300'>
+            <li>Home</li>
+            <li>About Us</li>
+            <li>Contact Us</li>
+            <li>Privacy Policy</li>
+          </ul>
         </div>
+
+        {/* Get In Touch */}
+        <div className='w-full md:w-1/3'>
+          <p className='uppercase text-lg font-semibold mb-4'>Get In Touch</p>
+          <ul className='space-y-2 text-gray-300'>
+            <li>+91-98765-43210</li>
+            <li>sahaj@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Footer Bottom */}
+      <div className='border-t border-gray-600 mt-10 pt-5'>
+        <p className='text-center text-xs text-gray-400'>
+          Copyright 2025@ SAHAJ - All Rights Reserved.
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,37 +1,33 @@
 import React, { useEffect } from "react";
-import { FaDna, FaBrain, FaPills, FaAmbulance } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import CountUp from "react-countup";
 import "aos/dist/aos.css";
 
+// Define the features array directly in this file
 const features = [
   {
-    icon: <FaDna className="text-blue-600 text-4xl mb-4" />,
+    img: "https://img.freepik.com/free-vector/hand-drawn-ai-healthcare-illustration_23-2151106570.jpg?t=st=1746928886~exp=1746932486~hmac=fc1cb620dc02a41448c8397510d214f10fd2fb6ea83ced09a96f1c6c12270023&w=826",
     title: "AI Diagnosis Model",
-    description:
-      "AI uses your genetic data to provide risk assessments and personalized health advice.",
-    link: "/diagnosis",
+    description: "AI uses your genetic data to provide risk assessments and personalized health advice.",
+    link: "http://localhost:8501/",
   },
   {
-    icon: <FaBrain className="text-blue-600 text-4xl mb-4" />,
+    img: "https://img.freepik.com/free-vector/illustrated-online-doctor-app_23-2148536240.jpg?t=st=1746928670~exp=1746932270~hmac=ee6db18f6ece3fe10982f789dc15f47eaaf84994e2b8d756f7bf7a71d12acc62&w=826",
     title: "Telemedicine App",
-    description:
-      "Receive personalized meditation and mental wellness routines based on mood tracking.",
+    description: "Receive personalized meditation and mental wellness routines based on mood tracking.",
     link: "/doctors",
   },
   {
-    icon: <FaPills className="text-blue-600 text-4xl mb-4" />,
+    img: "https://img.freepik.com/free-photo/futuristic-technology-hologram_23-2151917434.jpg?t=st=1746928745~exp=1746932345~hmac=a9bd8b9f8664fe3153eddff61ad9ba39919bff1324bf1762784cd56019d16b7f&w=740",
     title: "Medical History",
-    description:
-      "Track medications, receive reminders, and get alerts for potential interactions.",
+    description: "Track medications, receive reminders, and get alerts for potential interactions.",
     link: "/history",
   },
   {
-    icon: <FaAmbulance className="text-blue-600 text-4xl mb-4" />,
+    img: "https://img.freepik.com/free-vector/personal-emergency-button-abstract-concept-illustration_335657-3865.jpg?t=st=1746928838~exp=1746932438~hmac=dabb66f1d3899cbd8d38d90a36eb18f95d69fe6c540a53c081ee17e8f6b58861&w=826",
     title: "IOT Emergency Alerts",
-    description:
-      "AI detects emergency conditions and notifies your contacts immediately.",
+    description: "AI detects emergency conditions and notifies your contacts immediately.",
     link: "/iot",
   },
 ];
@@ -59,7 +55,11 @@ export default function NewFeatures() {
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
               >
-                {feature.icon}
+                <img
+                  src={feature.img}
+                  alt={feature.title}
+                  className="rounded-lg mb-4 w-full h-40 object-cover"
+                />
                 <h3 className="text-xl font-semibold mt-2 mb-3">{feature.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4">
                   {feature.description}

@@ -6,8 +6,9 @@ import Home from "../pages/AiHome";
 import AIAssistant from "../pages/AiAssistant";
 import IoT from "../pages/IOT";
 import MedicalHistory from "./MedicalHistory";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Doctors from "./Doctors";
+import NewFeatures from "./NewFeatures";
 
 export default function App() {
   const [expanded, setExpanded] = useState(false);
@@ -16,9 +17,18 @@ export default function App() {
   const navigate = useNavigate();
 
   const images = [
-    "https://img.freepik.com/free-vector/smart-healthcare-digital-health-flat-composition-text-gear-icons-images-gadgets-artificial-intelligence-vector-illustration_98292-9063.jpg?semt=ais_hybrid&w=740",
-    "https://d12aarmt01l54a.clo/udfront.net/cms/images/Media-20220422144416/1200-630.png",
-    "https://images.yourstory.com/cs/2/f02aced0d86311e98e0865c1f0fe59a2/digital-healthcare-1617709572074-1626296926080.png?mode=crop&crop=faces&ar=2%3A1&format=auto&w=1920&q=75",
+    {
+      url: "https://img.freepik.com/free-vector/artificial-intelligence-flat-concept-with-robotic-helper-smartphone-happy-characters-scientists-user-vector-illustration_1284-84244.jpg?t=st=1746932177~~exp=1746935777~~hmac=a4ea5bf7fce81fd10a9a1010ff081605cfa82c51cdaf9a1f902548c3970a83a5&w=1800",
+      caption: "Smart Healthcare with AI Integration",
+    },
+    {
+      url: "https://th.bing.com/th/id/R.20d5496d847647b54cdb4c5898f1054d?rik=M1LJ7LOSKTbSFg&riu=http%3a%2f%2fwww.datapharm.com%2fmedia%2fnswbqc1z%2fshutterstock_1181716903-structured-data-2.jpg%3fwidth%3d921%26height%3d568%26rnd%3d133282761426300000&ehk=kgrs0fvzFOWyyIUVnit2U4kIGoXTjtCbC0kDtraI6pY%3d&risl=&pid=ImgRaw&r=0",
+      caption: "Innovative Health Technologies",
+    },
+    {
+      url: "https://www.helpwire.app/blog/wp-content/uploads/2021/12/iot-in-healthcare.jpg",
+      caption: "Revolutionizing Healthcare with IoT",
+    },
   ];
 
   useEffect(() => {
@@ -30,16 +40,45 @@ export default function App() {
   }, []);
 
   const pages = {
-    home: <Home />, 
-    ai: <AIAssistant />, 
-    iot: <IoT />, 
-    telemedicine: <Doctors/>, 
+    home: <Home />,
+    ai: <AIAssistant />,
+    iot: <IoT />,
+    telemedicine: <Doctors />,
     medical: <MedicalHistory />,
     welcome: (
-      <div className="p-4 min-h-screen w-full bg-[#ffffff] text-gray-900 font-semibold flex flex-col items-center pt-14">
-        <h1 className="text-4xl mb-8">👋 Hello Welcome to SAHAJ!</h1>
+      <div className="p-4 min-h-screen w-full text-gray-900 font-semibold flex flex-col items-center pt-14">
+        <h1 className="text-5xl mb-16">👋 Welcome to SAHAJ!</h1>
 
-        {/* Carousel */}        
+        {/* Carousel */}
+        <div className="relative w-full max-w-6xl h-[60vh] rounded-lg overflow-hidden shadow-lg">
+          {/* Image */}
+          <img
+            src={images[currentSlide].url}
+            alt="Carousel"
+            className="object-cover w-full h-full transition-transform duration-500 ease-in-out"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+
+          {/* Caption */}
+          <div className="absolute bottom-4 left-4 text-white text-xl font-semibold bg-black bg-opacity-50 px-4 py-2 rounded-md">
+            {images[currentSlide].caption}
+          </div>
+
+          {/* Navigation Controls */}
+          <div
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white cursor-pointer"
+            onClick={() => setCurrentSlide((prev) => (prev - 1 + images.length) % images.length)}
+          >
+            &#10094; {/* Left Arrow */}
+          </div>
+          <div
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white cursor-pointer"
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % images.length)}
+          >
+            &#10095; {/* Right Arrow */}
+          </div>
+        </div>
       </div>
     ),
   };
@@ -48,62 +87,69 @@ export default function App() {
     <div className="flex h-screen">
       {/* Sidebar */}
       <div
-        className={`bg-[#f1f3f5] text-gray-900 border-r border-gray-300 p-4 transition-all duration-300 ${
-          expanded ? "w-48" : "w-16"
-        }`}
+        className={`bg-gradient-to-b from-gray-100 to-gray-300 text-gray-900 shadow-md border-r border-gray-400 p-4 transition-all duration-300 ${
+          expanded ? "w-52" : "w-16"
+        } rounded-r-xl`}
       >
-        <button onClick={() => setExpanded(!expanded)} className="mb-6">
-          <Menu />
-        </button>
+        {/* Toggle Button */}
+        <div className="flex items-center justify-center mb-8">
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="p-2 rounded-full hover:bg-gray-400 transition duration-300"
+          >
+            <Menu className="text-gray-800" />
+          </button>
+        </div>
 
         {/* Home */}
         <div
-          className="flex items-center gap-2 mb-4 cursor-pointer hover:bg-[#e9ecef] p-2 rounded"
+          className="flex items-center gap-2 mb-4 cursor-pointer hover:bg-gray-400 hover:scale-[1.02] p-2 rounded transition-all duration-300"
           onClick={() => setPage("home")}
         >
           <HomeIcon />
-          {expanded && <span>Home</span>}
+          {expanded && <span className="font-semibold">Home</span>}
         </div>
 
         {/* AI Assistant */}
-        <div
-          className="flex items-center gap-2 cursor-pointer hover:bg-[#e9ecef] p-2 rounded"
-          onClick={() => setPage("ai")}
-        >
-          <Bot />
-          {expanded && <span>AI Assistant</span>}
-        </div>
+       <div
+  className="flex items-center gap-2 cursor-pointer hover:bg-gray-400 hover:scale-[1.02] p-2 rounded transition-all duration-300"
+  onClick={() => window.location.href = "http://localhost:8501/"}
+>
+  <Bot />
+  {expanded && <span className="font-semibold">AI Diagnosis</span>}
+</div>
+
 
         {/* Telemedicine */}
         <div
-          className="flex items-center gap-2 cursor-pointer hover:bg-[#e9ecef] p-2 rounded"
-          onClick={() => setPage('telemedicine')}
+          className="flex items-center gap-2 cursor-pointer hover:bg-gray-400 hover:scale-[1.02] p-2 rounded transition-all duration-300"
+          onClick={() => setPage("telemedicine")}
         >
-          <span className="text-lg">🩺</span>
-          {expanded && <span>Telemedicine</span>}
+          <span className="text-xl">🩺</span>
+          {expanded && <span className="font-semibold">Telemedicine</span>}
         </div>
 
         {/* IoT */}
         <div
-          className="flex items-center gap-2 cursor-pointer hover:bg-[#e9ecef] p-2 rounded"
+          className="flex items-center gap-2 cursor-pointer hover:bg-gray-400 hover:scale-[1.02] p-2 rounded transition-all duration-300"
           onClick={() => setPage("iot")}
         >
-          <span className="text-lg">📡</span>
-          {expanded && <span>IoT</span>}
+          <span className="text-xl">📡</span>
+          {expanded && <span className="font-semibold">IoT</span>}
         </div>
 
         {/* Medical History */}
         <div
-          className="flex items-center gap-2 cursor-pointer hover:bg-[#e9ecef] p-2 rounded"
+          className="flex items-center gap-2 cursor-pointer hover:bg-gray-400 hover:scale-[1.02] p-2 rounded transition-all duration-300"
           onClick={() => setPage("medical")}
         >
-          <span className="text-lg">📝</span>
-          {expanded && <span>Medical History</span>}
+          <span className="text-xl">📝</span>
+          {expanded && <span className="font-semibold">Medical History</span>}
         </div>
       </div>
 
       {/* Page Content */}
-      <div className="flex-1 bg-[#ffffff] overflow-auto">{pages[page]}</div>
+      <div className="flex-1 bg-gray-300 overflow-auto p-6">{pages[page]}</div>
     </div>
   );
 }
